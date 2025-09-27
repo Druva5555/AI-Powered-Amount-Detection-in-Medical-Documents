@@ -229,18 +229,18 @@ Example Response:
 }
 ```
 
-##Normalization & Classification
+## Normalization & Classification
 
 Normalization: Corrects OCR misreads, converts percentages, and ensures numeric format.
 
 Classification: Uses keyword matching and fuzzy string matching (string-similarity) to assign amounts to categories.
 
-##Fallbacks
+## Fallbacks
 
 If GEMINI_API_KEY is missing or Gemini OCR fails, the system uses Tesseract.js for OCR.
 
 Default currency is INR if no hints are found.
 
-##License
+## License
 MIT License
 
