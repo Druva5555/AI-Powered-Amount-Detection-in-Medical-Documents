@@ -84,5 +84,163 @@ OPENAI_API_KEY: Your OpenAI API key for AI functionalities.
 
 PORT: The port on which the server will run (default is 3000).
 
-##
+## Running the Server
+
+Start the server using Node.js:
+```bash
+node index.js
+```
+The server will start on the port specified in the .env file (default is http://localhost:3000).
+
+
+## API Usage
+Endpoint: /api/v1/extract
+
+Method: POST
+Content-Type: multipart/form-data (for images) or application/json (for raw text)
+
+1. Upload an Image (Postman)
+In Postman:
+Select POST
+URL: http://localhost:3000/api/v1/extract
+
+Body → form-data
+Key: image → Type: File → Select your receipt image
+
+http://localhost:3000/api/v1/extract?step=4
+
+Example Response:
+```bash
+{
+    "pipeline": {
+        "step1": {
+            "raw_tokens": [
+                "12345",
+                "2025",
+                "09",
+                "27",
+                "500",
+                "18%",
+                "270",
+                "770",
+                "5%"
+            ],
+            "currency_hint": "UNKNOWN",
+            "confidence": 0.99
+        },
+        "step2": {
+            "normalized_amounts": [
+                12345,
+                2025,
+                9,
+                27,
+                500,
+                18,
+                270,
+                770,
+                5
+            ],
+            "normalization_confidence": 0.99
+        },
+        "step3": {
+            "amounts": [
+                {
+                    "type": "subtotal",
+                    "value": 1500,
+                    "isPercent": false,
+                    "source": "text: 'Subtotal: 1,500'"
+                },
+                {
+                    "type": "tax",
+                    "value": 270,
+                    "isPercent": false,
+                    "source": "text: 'GST (18%): 270'"
+                },
+                {
+                    "type": "total_bill",
+                    "value": 1770,
+                    "isPercent": false,
+                    "source": "text: 'Total: 1,770'"
+                },
+                {
+                    "type": "paid",
+                    "value": 1500,
+                    "isPercent": false,
+                    "source": "text: 'Amount Paid: 1,500'"
+                },
+                {
+                    "type": "due",
+                    "value": 270,
+                    "isPercent": false,
+                    "source": "text: 'Balance Due: 270'"
+                },
+                {
+                    "type": "discount",
+                    "value": 5,
+                    "isPercent": true,
+                    "source": "text: 'Discount Applied: 5%'"
+                }
+            ],
+            "confidence": 0.95
+        }
+    },
+    "final": {
+        "currency": "INR",
+        "amounts": [
+            {
+                "type": "subtotal",
+                "value": 1500,
+                "isPercent": false,
+                "source": "text: 'Subtotal: 1,500'"
+            },
+            {
+                "type": "tax",
+                "value": 270,
+                "isPercent": false,
+                "source": "text: 'GST (18%): 270'"
+            },
+            {
+                "type": "total_bill",
+                "value": 1770,
+                "isPercent": false,
+                "source": "text: 'Total: 1,770'"
+            },
+            {
+                "type": "paid",
+                "value": 1500,
+                "isPercent": false,
+                "source": "text: 'Amount Paid: 1,500'"
+            },
+            {
+                "type": "due",
+                "value": 270,
+                "isPercent": false,
+                "source": "text: 'Balance Due: 270'"
+            },
+            {
+                "type": "discount",
+                "value": 5,
+                "isPercent": true,
+                "source": "text: 'Discount Applied: 5%'"
+            }
+        ],
+        "status": "ok"
+    }
+}
+```
+
+##Normalization & Classification
+
+Normalization: Corrects OCR misreads, converts percentages, and ensures numeric format.
+
+Classification: Uses keyword matching and fuzzy string matching (string-similarity) to assign amounts to categories.
+
+##Fallbacks
+
+If GEMINI_API_KEY is missing or Gemini OCR fails, the system uses Tesseract.js for OCR.
+
+Default currency is INR if no hints are found.
+
+##License
+MIT License
 
