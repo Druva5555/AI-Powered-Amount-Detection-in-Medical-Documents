@@ -76,3 +76,11 @@ PORT=3000
 ```
 Replace <your_gemini_api_key> and <your_openai_api_key> with your actual API keys.
 
+##Environment Variables
+
+GEMINI_API_KEY: Your Google Gemini API key for OCR. If not set, the application will use Tesseract.js for OCR.
+
+OPENAI_API_KEY: Your OpenAI API key for AI functionalities.
+
+PORT: The port on which the server will run (default is 3000).
+
