@@ -10,7 +10,7 @@ const commonMap = {
 
 
 function fixToken(token) {
-  if (!token) return null;
+  if (!token) return null;    
 
   let t = token.trim();
 
