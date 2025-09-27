@@ -1,7 +1,6 @@
 # AI-Powered Amount Detection in Medical Documents
 
-
-A Node.js service to extract, normalize, and classify financial amounts from receipts or medical bills (typed or scanned). It supports both OCR from images and direct text input.
+An AI-driven Node.js service designed to extract, normalize, and classify financial amounts from medical receipts and bills. This application supports both Optical Character Recognition (OCR) from images and direct text input.
 
 ---
 
@@ -21,18 +20,20 @@ A Node.js service to extract, normalize, and classify financial amounts from rec
 
 ## Features
 
-- Extract numeric tokens from receipts/bills.
-- Normalize OCR errors (common misreads like `O` → `0`, `l` → `1`, etc.).
-- Detect currency from text hints (`INR`, `USD`, `EUR`).
-- Classify amounts as `subtotal`, `tax`, `total_bill`, `paid`, `due`, `discount`.
-- Supports image upload and text input.
-- Fallback OCR using Tesseract if Google Gemini OCR fails.
+- **OCR & Text Extraction**: Extracts text from medical receipts and bills using OCR.
+- **Token Extraction**: Identifies numeric tokens from the extracted text.
+- **Amount Normalization**: Corrects common OCR errors and standardizes amounts.
+- **Currency Detection**: Detects currency symbols and abbreviations (e.g., ₹, INR, USD).
+- **Amount Classification**: Categorizes amounts into predefined types such as subtotal, tax, total bill, paid, due, and discount.
+- **Fallback Mechanism**: Utilizes Tesseract.js for OCR if Google Gemini API fails or is unavailable.
 
 ---
 
 ## Architecture
 
-1. **OCR / Text Extraction** (`ocr.js` / `ocr_helpers.js`)  
+The application follows a modular architecture:
+
+1. **OCR / Text Extraction** (`ocr.js`, `ocr_helpers.js`)  
    - Uses Google Gemini API for OCR if `GEMINI_API_KEY` is set.  
    - Falls back to Tesseract.js for OCR.
 
@@ -59,5 +60,6 @@ A Node.js service to extract, normalize, and classify financial amounts from rec
 1. Clone the repository:
 
 ```bash
-git clone <your-repo-url>
-cd <repo-folder>
+git clone https://github.com/Druva5555/AI-Powered-Amount-Detection-in-Medical-Documents.git
+cd AI-Powered-Amount-Detection-in-Medical-Documents
+
