@@ -7,7 +7,7 @@ function extractRawTokens(text) {
     .map(t => t.trim())
     .filter(t => t.length > 0);
 
-  const candidates = [];
+  const candidates = [];    
   const amountRegex = /([0-9OIlSbB]+(?:[.,][0-9OIlSbB]+)*%?)/g;
 
   for (const token of tokens) {
