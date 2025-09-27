@@ -4,7 +4,7 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 const apiKey = process.env.OPENAI_API_KEY;
 let genAI = null;
-if (apiKey) {
+if (apiKey) {    
   genAI = new GoogleGenerativeAI(apiKey);
 }
 
