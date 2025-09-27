@@ -62,4 +62,17 @@ The application follows a modular architecture:
 ```bash
 git clone https://github.com/Druva5555/AI-Powered-Amount-Detection-in-Medical-Documents.git
 cd AI-Powered-Amount-Detection-in-Medical-Documents
+```
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Create a .env file in the root directory with the following content:
+```bash
+GEMINI_API_KEY=<your_gemini_api_key>
+OPENAI_API_KEY=<your_openai_api_key>
+PORT=3000
+```
+Replace <your_gemini_api_key> and <your_openai_api_key> with your actual API keys.
 
