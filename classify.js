@@ -4,7 +4,7 @@ function extractNumberFromLine(line) {
   const matches = line.replace(/,/g, '').match(/(\d+(\.\d+)?%?)/g);
   if (!matches) return null;
 
-  // Take the last number (could be %)
+  // Take the last number (could be %)    
   const last = matches[matches.length - 1];
   const isPercent = last.endsWith('%');
   const value = parseFloat(last.replace('%', ''));
